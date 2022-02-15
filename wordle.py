@@ -21,6 +21,7 @@ hints=list(hints)
 cand=set()
 # nltk.download("words")
 english_vocab = nltk.corpus.words.words()+list(nltk.corpus.wordnet.words())
+english_vocab = [x.lower() for x in english_vocab]
 english_vocab = set(english_vocab)
 def check(t):
     if t.lower() in english_vocab:
