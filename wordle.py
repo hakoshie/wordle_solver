@@ -12,7 +12,7 @@ for i in range(len(ts)):
 print("candidates",cand_chars)
 cand_chars=cand_chars.lower()
 n=len(cand_chars)
-print("input the known characters: apple -> a**le >>>",end=" ")
+print("input the known characters: apple -> a..le >>>",end=" ")
 known_str=input()
 known=list(known_str)
 print("input the hint characters >>>",end= " ")
@@ -21,8 +21,9 @@ hints=list(hints)
 cand=set()
 # nltk.download("words")
 english_vocab = nltk.corpus.words.words()+list(nltk.corpus.wordnet.words())
-english_vocab = [x.lower() for x in english_vocab]
-english_vocab = set(english_vocab)
+english_vocab = set([x.lower() for x in english_vocab if len(x)==5])
+
+arbitrary=["*","."]
 def check(t):
     if t.lower() in english_vocab:
         cand.add(t)
@@ -40,7 +41,7 @@ for i in range(n):
                 indices=[i,j,k,l]
                 used=[]
                 while len(tmp)<5:
-                    if(known[idx]!="*"):
+                    if(known[idx] not in arbitrary):
                         tmp+=known[idx]
                         cnt+=1
                     else:
