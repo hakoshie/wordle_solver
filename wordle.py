@@ -2,8 +2,6 @@ import sys
 import nltk
 import time
 start_time=time.perf_counter()
-
-
 ts="abcdefghijklmnopqrstuvwxyz"
 print("input the characters not used in the word >>>",end=" ")
 sout=input()
@@ -22,7 +20,8 @@ hints=input()
 hints=list(hints)
 cand=set()
 # nltk.download("words")
-english_vocab = set(w.lower() for w in nltk.corpus.words.words())
+english_vocab = nltk.corpus.words.words()+list(nltk.corpus.wordnet.words())
+english_vocab = set(english_vocab)
 def check(t):
     if t.lower() in english_vocab:
         cand.add(t)
