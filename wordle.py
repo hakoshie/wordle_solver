@@ -13,8 +13,8 @@ print("candidates",cand_chars)
 cand_chars=cand_chars.lower()
 n=len(cand_chars)
 print("input the known characters: apple -> a..le >>>",end=" ")
-known_str=input()
-known_str=list(known_str)
+known_chars=input()
+known_chars=list(known_chars)
 print("input the hint characters >>>",end= " ")
 hints=input()
 hints=list(hints)
@@ -41,8 +41,8 @@ for i in range(n):
                 indices=[i,j,k,l]
                 used=[]
                 while len(tmp_word)<5:
-                    if(known_str[idx] not in arbitrary):
-                        tmp_word+=known_str[idx]
+                    if(known_chars[idx] not in arbitrary):
+                        tmp_word+=known_chars[idx]
                         cnt+=1
                     else:
                        tmp_word+=cand_chars[indices[idx-cnt]]
@@ -64,11 +64,10 @@ end_time=time.perf_counter()
 print(f'{end_time-start_time:.2f}',"seconds")
 print("cands = ",cand_words)
 if(len(cand_words)>2):
-    while(1):
+    while(len(cand_words)!=1):
         print("Currently, the number of candidates is ",len(cand_words))
-        print("input the character and place to exclude, like n 1.","(6 for deleting for all place)")
-        print("(6 + place for determined a character) >>>")
-
+        print("input the character and place to exclude, like n 1 (n is not the first place)","(6 for deleting for all place)")
+        print("(6 + place for determined the character's place) >>>")
         try:
             char, place=input().split()
         except:
@@ -84,7 +83,7 @@ if(len(cand_words)>2):
         elif(place<=5):
             # charがその位置ではない場合
             for s in cand_words:
-                if(s[place]==char):
+                if(s[place-1]==char):
                     cand_drop.add(s)
         else:
             # charが含まれていない場合
